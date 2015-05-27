@@ -1,0 +1,43 @@
+﻿@model UnicefMarketplace.Models.RegionEvent
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>RegionEvent</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Region.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Region.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.EventHeadline)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EventHeadline)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.EventDescription)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EventDescription)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Severity)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Severity)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.RegionEventId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="UnicefMarketplaceModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="UnicefMarketplaceModelStoreContainer">
+          <EntitySet Name="Orders" EntityType="UnicefMarketplaceModel.Store.Orders" store:Type="Tables" Schema="unicefmarketplace" />
+          <EntitySet Name="Products" EntityType="UnicefMarketplaceModel.Store.Products" store:Type="Tables" Schema="unicefmarketplace" />
+          <EntitySet Name="RegionEvents" EntityType="UnicefMarketplaceModel.Store.RegionEvents" store:Type="Tables" Schema="unicefmarketplace" />
+          <EntitySet Name="Regions" EntityType="UnicefMarketplaceModel.Store.Regions" store:Type="Tables" Schema="unicefmarketplace" />
+          <AssociationSet Name="product" Association="UnicefMarketplaceModel.Store.product">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="region" Association="UnicefMarketplaceModel.Store.region">
+            <End Role="Regions" EntitySet="Regions" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="regions1" Association="UnicefMarketplaceModel.Store.regions1">
+            <End Role="Regions" EntitySet="Regions" />
+            <End Role="RegionEvents" EntitySet="RegionEvents" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="RegionId" Type="int" Nullable="false" />
+          <Property Name="DateEntered" Type="datetime" Nullable="false" />
+          <Property Name="Price" Type="decimal" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="ProductId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="varchar" Nullable="false" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="RegionEvents">
+          <Key>
+            <PropertyRef Name="RegionEventId" />
+          </Key>
+          <Property Name="RegionEventId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RegionId" Type="int" Nullable="false" />
+          <Property Name="EventHeadline" Type="varchar" MaxLength="500" />
+          <Property Name="EventDescription" Type="varchar" MaxLength="5000" />
+          <Property Name="Severity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Regions">
+          <Key>
+            <PropertyRef Name="RegionId" />
+          </Key>
+          <Property Name="RegionId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="500" />
+        </EntityType>
+        <Association Name="product">
+          <End Role="Products" Type="UnicefMarketplaceModel.Store.Products" Multiplicity="1" />
+          <End Role="Orders" Type="UnicefMarketplaceModel.Store.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="region">
+          <End Role="Regions" Type="UnicefMarketplaceModel.Store.Regions" Multiplicity="1" />
+          <End Role="Orders" Type="UnicefMarketplaceModel.Store.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Regions">
+              <PropertyRef Name="RegionId" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="regions1">
+          <End Role="Regions" Type="UnicefMarketplaceModel.Store.Regions" Multiplicity="1" />
+          <End Role="RegionEvents" Type="UnicefMarketplaceModel.Store.RegionEvents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Regions">
+              <PropertyRef Name="RegionId" />
+            </Principal>
+            <Dependent Role="RegionEvents">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UnicefMarketplaceModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="UnicefMarketplaceEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Orders" EntityType="UnicefMarketplaceModel.Order" />
+          <EntitySet Name="Products" EntityType="UnicefMarketplaceModel.Product" />
+          <EntitySet Name="Regions" EntityType="UnicefMarketplaceModel.Region" />
+          <AssociationSet Name="product1" Association="UnicefMarketplaceModel.product1">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="region1" Association="UnicefMarketplaceModel.region1">
+            <End Role="Region" EntitySet="Regions" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <EntitySet Name="RegionEvents" EntityType="UnicefMarketplaceModel.RegionEvent" />
+          <AssociationSet Name="regions1" Association="UnicefMarketplaceModel.regions1">
+            <End Role="Region" EntitySet="Regions" />
+            <End Role="RegionEvent" EntitySet="RegionEvents" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Type="Int32" Name="OrderId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ProductId" Nullable="false" />
+          <Property Type="Int32" Name="RegionId" Nullable="false" />
+          <Property Type="DateTime" Name="DateEntered" Nullable="false" Precision="0" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="10" Scale="0" />
+          <NavigationProperty Name="Product" Relationship="UnicefMarketplaceModel.product1" FromRole="Order" ToRole="Product" />
+          <NavigationProperty Name="Region" Relationship="UnicefMarketplaceModel.region1" FromRole="Order" ToRole="Region" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Type="Int32" Name="ProductId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="ProductName" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Orders" Relationship="UnicefMarketplaceModel.product1" FromRole="Product" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="RegionId" />
+          </Key>
+          <Property Type="Int32" Name="RegionId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Orders" Relationship="UnicefMarketplaceModel.region1" FromRole="Region" ToRole="Order" />
+          <NavigationProperty Name="RegionEvents" Relationship="UnicefMarketplaceModel.regions1" FromRole="Region" ToRole="RegionEvent" />
+        </EntityType>
+        <Association Name="product1">
+          <End Type="UnicefMarketplaceModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="UnicefMarketplaceModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="region1">
+          <End Type="UnicefMarketplaceModel.Region" Role="Region" Multiplicity="1" />
+          <End Type="UnicefMarketplaceModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="RegionId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="RegionEvent">
+          <Key>
+            <PropertyRef Name="RegionEventId" />
+          </Key>
+          <Property Type="Int32" Name="RegionEventId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="RegionId" Nullable="false" />
+          <Property Type="String" Name="EventHeadline" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="EventDescription" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Severity" Nullable="false" />
+          <NavigationProperty Name="Region" Relationship="UnicefMarketplaceModel.regions1" FromRole="RegionEvent" ToRole="Region" />
+        </EntityType>
+        <Association Name="regions1">
+          <End Type="UnicefMarketplaceModel.Region" Role="Region" Multiplicity="1" />
+          <End Type="UnicefMarketplaceModel.RegionEvent" Role="RegionEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="RegionId" />
+            </Principal>
+            <Dependent Role="RegionEvent">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="UnicefMarketplaceModelStoreContainer" CdmEntityContainer="UnicefMarketplaceEntities">
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="UnicefMarketplaceModel.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="UnicefMarketplaceModel.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Regions">
+            <EntityTypeMapping TypeName="UnicefMarketplaceModel.Region">
+              <MappingFragment StoreEntitySet="Regions">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegionEvents">
+            <EntityTypeMapping TypeName="UnicefMarketplaceModel.RegionEvent">
+              <MappingFragment StoreEntitySet="RegionEvents">
+                <ScalarProperty Name="Severity" ColumnName="Severity" />
+                <ScalarProperty Name="EventDescription" ColumnName="EventDescription" />
+                <ScalarProperty Name="EventHeadline" ColumnName="EventHeadline" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="RegionEventId" ColumnName="RegionEventId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

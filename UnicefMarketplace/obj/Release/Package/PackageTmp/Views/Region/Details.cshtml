@@ -1,0 +1,27 @@
+﻿@model UnicefMarketplace.Models.Region
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+@foreach (var regionalevent in ViewBag.RegionalEvents)
+{
+    <h3><font color="red">Event: @regionalevent.EventHeadline, Severity level @regionalevent.Severity</font></h3>
+}
+<fieldset>
+    <h1>@Model.Name</h1>
+
+    <h2>Regional Product Data</h2>
+    <table>
+    @foreach (var product in ViewBag.Products)
+    {
+        <tr><td><a href="/Region/RegionProductDetails/@Model.RegionId?productId=@product.ProductId">@product.ProductName</a></td></tr>
+    }
+        </table>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.RegionId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

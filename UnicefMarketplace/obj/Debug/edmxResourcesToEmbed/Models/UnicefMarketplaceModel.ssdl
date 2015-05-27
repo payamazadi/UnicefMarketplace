@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="UnicefMarketplaceModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="UnicefMarketplaceModelStoreContainer">
+    <EntitySet Name="Orders" EntityType="UnicefMarketplaceModel.Store.Orders" store:Type="Tables" Schema="unicefmarketplace" />
+    <EntitySet Name="Products" EntityType="UnicefMarketplaceModel.Store.Products" store:Type="Tables" Schema="unicefmarketplace" />
+    <EntitySet Name="RegionEvents" EntityType="UnicefMarketplaceModel.Store.RegionEvents" store:Type="Tables" Schema="unicefmarketplace" />
+    <EntitySet Name="Regions" EntityType="UnicefMarketplaceModel.Store.Regions" store:Type="Tables" Schema="unicefmarketplace" />
+    <AssociationSet Name="product" Association="UnicefMarketplaceModel.Store.product">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="region" Association="UnicefMarketplaceModel.Store.region">
+      <End Role="Regions" EntitySet="Regions" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="regions1" Association="UnicefMarketplaceModel.Store.regions1">
+      <End Role="Regions" EntitySet="Regions" />
+      <End Role="RegionEvents" EntitySet="RegionEvents" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ProductId" Type="int" Nullable="false" />
+    <Property Name="RegionId" Type="int" Nullable="false" />
+    <Property Name="DateEntered" Type="datetime" Nullable="false" />
+    <Property Name="Price" Type="decimal" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ProductName" Type="varchar" Nullable="false" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="RegionEvents">
+    <Key>
+      <PropertyRef Name="RegionEventId" />
+    </Key>
+    <Property Name="RegionEventId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="RegionId" Type="int" Nullable="false" />
+    <Property Name="EventHeadline" Type="varchar" MaxLength="500" />
+    <Property Name="EventDescription" Type="varchar" MaxLength="5000" />
+    <Property Name="Severity" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Regions">
+    <Key>
+      <PropertyRef Name="RegionId" />
+    </Key>
+    <Property Name="RegionId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="500" />
+  </EntityType>
+  <Association Name="product">
+    <End Role="Products" Type="UnicefMarketplaceModel.Store.Products" Multiplicity="1" />
+    <End Role="Orders" Type="UnicefMarketplaceModel.Store.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="region">
+    <End Role="Regions" Type="UnicefMarketplaceModel.Store.Regions" Multiplicity="1" />
+    <End Role="Orders" Type="UnicefMarketplaceModel.Store.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Regions">
+        <PropertyRef Name="RegionId" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="RegionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="regions1">
+    <End Role="Regions" Type="UnicefMarketplaceModel.Store.Regions" Multiplicity="1" />
+    <End Role="RegionEvents" Type="UnicefMarketplaceModel.Store.RegionEvents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Regions">
+        <PropertyRef Name="RegionId" />
+      </Principal>
+      <Dependent Role="RegionEvents">
+        <PropertyRef Name="RegionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

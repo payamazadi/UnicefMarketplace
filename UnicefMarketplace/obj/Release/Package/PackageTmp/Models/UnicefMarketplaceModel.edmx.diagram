@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5cb870caf0354e6c963a4b1368ce6f41" Name="Diagram1" ZoomLevel="125">
+        <EntityTypeShape EntityType="UnicefMarketplaceModel.Order" Width="1.5" PointX="4.5" PointY="5.875" />
+        <EntityTypeShape EntityType="UnicefMarketplaceModel.Product" Width="1.5" PointX="3.625" PointY="1.625" />
+        <EntityTypeShape EntityType="UnicefMarketplaceModel.Region" Width="1.5" PointX="9" PointY="6.25" />
+        <AssociationConnector Association="UnicefMarketplaceModel.product1" />
+        <AssociationConnector Association="UnicefMarketplaceModel.region1" />
+        <EntityTypeShape EntityType="UnicefMarketplaceModel.RegionEvent" Width="1.5" PointX="8.625" PointY="2.125" />
+        <AssociationConnector Association="UnicefMarketplaceModel.regions1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
