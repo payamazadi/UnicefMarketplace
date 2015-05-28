@@ -140,6 +140,7 @@ namespace UnicefMarketplace.Controllers
 				else
 				{
 					var averageOrderCount = averageQuery.Count() / day;
+					
 					var averagePrice = averageQuery.Average(x => x.Price);
 
 					averages.Add(new MovingAverage { Days = day, Orders = averageOrderCount, Price = averagePrice});    
@@ -153,6 +154,12 @@ namespace UnicefMarketplace.Controllers
         {
             var twoDayMovingAverage = averages[1].Orders;
             var fiveDayMovingAverage = averages[2].Orders;
+
+			//handle cases where 5-day average is 0, and where 5-day average is 0 and 2-day average is 1. 
+			if (fiveDayMovingAverage == 0)
+				fiveDayMovingAverage = twoDayMovingAverage / 2;
+	        if (fiveDayMovingAverage == 0)
+		        fiveDayMovingAverage = 1;
 
             var fiveDayMAPlus15 = fiveDayMovingAverage * 1.15;
 

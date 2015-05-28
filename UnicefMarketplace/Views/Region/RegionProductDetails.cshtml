@@ -39,7 +39,7 @@
     <hr />
     <h4>Price determinations:</h4>
     <ul>
-        <li>If the 2 day moving average number of orders breaks above the 10 day moving average number of orders, this is considered a basic price surge. We increase the suggested price by a factor of the percentage difference from the 5-day average, and add an additional 5%.</li>
+        <li>If the 2 day moving average number of orders breaks above the 5 day moving average number of orders, this is considered a basic price surge. We increase the suggested price by a factor of the percentage difference from the 5-day average, and add an additional 5%. If the 5 day average number of orders is 0, we use half of the 2-day average as a baseline. </li>
         <li>If the 5 day moving average price breaks above the 200 day moving average price, this means a major price breakout is imminent or occurring. We increase the suggested price by a factor of 30% from the 5-day average</li>
         <li>For each active event surrounding this region, we add 10 * severity level % (e.g. severity 1 adds 10%) to 5-day moving average price.</li>
     </ul>
