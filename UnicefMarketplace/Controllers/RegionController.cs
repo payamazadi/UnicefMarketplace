@@ -127,17 +127,23 @@ namespace UnicefMarketplace.Controllers
         {
             List<int> days = new List<int> { 1, 2, 5, 10, 50, 200 };
             List<MovingAverage> averages = new List<MovingAverage>();
-
+			//var db2 = new UnicefMarketplaceEntities();
             foreach (var day in days)
             {
                 var dateSince = DateTime.Today.AddDays(-1 * day);
                 var averageQuery = from o in db.Orders
                                    where o.DateEntered >= dateSince && o.ProductId == productId && o.RegionId == regionId
                                    select o;
-                var averageOrderCount = averageQuery.Count() / day;
-                var averagePrice = averageQuery.Average(x => x.Price);
 
-                averages.Add(new MovingAverage { Days = day, Orders = averageOrderCount, Price = averagePrice});
+	            if (averageQuery.Any() == false)
+					averages.Add(new MovingAverage{Days = 1, Orders = 0, Price = 0});
+				else
+				{
+					var averageOrderCount = averageQuery.Count() / day;
+					var averagePrice = averageQuery.Average(x => x.Price);
+
+					averages.Add(new MovingAverage { Days = day, Orders = averageOrderCount, Price = averagePrice});    
+	            }
             }
 
             return averages;
